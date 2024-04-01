@@ -26,6 +26,11 @@ body{
     flex-direction: column;
     gap: 64px;
 }
+.text-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 .title{
     font-size: 48px;
     font-weight: 900;
@@ -71,5 +76,17 @@ button{
     font-size: 20px;
     text-align: center;
     font-weight: bold;
+    cursor: pointer;
+}
+.hidden{
+    display:none;
+}
+.reset{
+    flex: auto;
+    font-size: 28px;
+    font-weight: 500;
+    color: #E0E1DD;
+    text-align: center;
+    font-style: italic;
     cursor: pointer;
 }
