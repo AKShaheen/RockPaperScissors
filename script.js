@@ -24,7 +24,26 @@ function playRound(playerSelection, computerSelection){
         return 'lose';
     }
 }
-
+let selection = document.querySelector('.btn-container');
+selection.addEventListener('click', function(e){
+    const computerChoice = getComputerChoice();
+    let result = '';
+    let target = e.target;
+    switch(target.className){
+        case 'rock':
+            result = playRound('rock',computerChoice);
+            console.log(result);
+            break;
+        case 'paper':
+            result = playRound('paper',computerChoice);
+            console.log(result);
+            break;
+        case 'scissors':
+            result = playRound('scissors',computerChoice);
+            console.log(result);
+            break;
+    }
+});
 function playGame(flag){
     let win=0,lose=0,tie=0;
     while(flag !=0){
