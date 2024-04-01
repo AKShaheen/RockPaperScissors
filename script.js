@@ -58,4 +58,3 @@ function playGame(flag){
         playGame(1);
     }   
 }
-playGame(5);
