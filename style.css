@@ -78,6 +78,11 @@ button{
     font-weight: bold;
     cursor: pointer;
 }
+button:hover{
+    background-color: #778DA9;
+    color: #1B263B;
+    box-shadow: none;
+}
 .hidden{
     display:none;
 }

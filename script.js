@@ -4,9 +4,25 @@ const playerScoreEl = document.querySelector('.player-score');
 const computerScoreEl = document.querySelector('.computer-score');
 const reset = document.querySelector('.reset');
 const subTitleEl = document.querySelector('.sub-title');
-const buttons = document.querySelector('.btn');
+const buttons = document.getElementsByClassName('btn');
+const containerEl = document.querySelector('.container');
 function getComputerChoice(){
     return choices[Math.floor(Math.random() * 3)];
+}
+
+function changeButtonState(state){
+    switch(state){
+        case 'disable':
+            for(let i = 0; i< buttons.length; i++){
+                buttons[i].disabled = true;
+            }
+            break;
+        case 'enable':
+            for(let i = 0; i< buttons.length; i++){
+                buttons[i].disabled = false;
+            }
+            break;
+    }
 }
 function checkScore(){
     if(playerScore === 5){
@@ -28,13 +44,17 @@ function updateStates(result){
         playerScoreEl.classList.add('hidden');
         computerScoreEl.classList.add('hidden');
         reset.classList.remove('hidden');
-        buttons.disabled = true;
+        subTitleEl.style.color = '#62A87C'
+        changeButtonState('disable');
         subTitleEl.textContent = `🤖 You WIN, Got Me This Time`
+
     }else if(result === 'computerWin'){
         playerScoreEl.classList.add('hidden');
         computerScoreEl.classList.add('hidden');
         reset.classList.remove('hidden');
-        subTitleEl.textContent = `🤖 HAHAHAHAHA YOU LOSE, My Game, My World`
+        changeButtonState('disable');
+        subTitleEl.style.color = '#FB3640'
+        subTitleEl.textContent = `🤖 HAHA YOU LOSE, My Game, My World`
     }else{
         subTitleEl.textContent = `🤖 It's a ${result.toUpperCase()}, I Can Read Your MIND! HAHAHA`;
     }
@@ -67,15 +87,15 @@ selection.addEventListener('click', function(e){
         let result = '';
         let target = e.target;
         switch(target.className){
-            case 'rock':
+            case 'rock btn':
                 result = playRound('rock',computerChoice);
                 updateStates(result);
                 break;
-            case 'paper':
+            case 'paper btn':
                 result = playRound('paper',computerChoice);
                 updateStates(result);
                 break;
-            case 'scissors':
+            case 'scissors btn':
                 result = playRound('scissors',computerChoice);
                 updateStates(result);
                 break;
@@ -91,38 +111,6 @@ reset.addEventListener('click',function(){
     playerScoreEl.textContent = `👨 Your Score : 0`;
     computerScoreEl.textContent = `🤖 My Score : 0`;
     subTitleEl.textContent = `🤖 Can You Beat ME? huh!`;
-    buttons.disabled = false;
+    subTitleEl.style.color = '#778DA9';
+    changeButtonState('enable');
 });
-/*function playGame(flag){
-    let win=0,lose=0,tie=0;
-    while(flag !=0){
-        const computerChoice = getComputerChoice();
-        console.log(computerChoice);
-        const playerChoice = getPlayerChoice();
-        const result = playRound(playerChoice, computerChoice);
-        if(result === 'win'){
-            console.log('You Win!');
-            win ++;
-            flag--;
-        }
-        else if(result === 'lose'){
-            console.log('You Lose!');
-            lose++;
-            flag--;
-        }
-        else if(result === 'tie'){
-            console.log('You Tied!');
-            tie++;
-            flag--;
-        }
-    }
-    console.log(win,lose,tie);
-    if(win > lose && win > tie){
-        alert('You Win!');
-    }else if(lose > tie && lose > win){
-        alert('You Lose!');
-    }else{
-        alert('Tie Breaker!');
-        playGame(1);
-    }   
-}*/
